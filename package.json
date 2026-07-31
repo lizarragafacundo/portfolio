@@ -22,6 +22,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@lizdevs/desk-character": "file:../desk-character",
     "motion": "^12.23.12",
     "next": "16.2.12",
     "react": "19.2.0",

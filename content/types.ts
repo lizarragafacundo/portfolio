@@ -67,9 +67,28 @@ export interface Education {
   description: string
 }
 
+/**
+ * Copy for the drawn desk character above the hero.
+ *
+ * Only the `whoami` frame is here. The rest of the terminal prints tool names —
+ * `terraform`, `eventbridge`, `qdrant` — which are the same word in every
+ * language, and live in the persona inside `@lizdevs/desk-character`.
+ */
+export interface Character {
+  /** Accessible name for the palette toggle in the nav. */
+  themeSwitch: string
+  /** Label for the terminal-green palette. */
+  themeMatrix: string
+  /** Label for the original violet-on-ice palette. */
+  themeLight: string
+  /** Exactly three lines — the `$ whoami` frame is a full-width `list`. */
+  whoami: readonly [string, string, string]
+}
+
 export interface Content {
   nav: NavLabels
   hero: Hero
+  character: Character
   about: string
   skills: readonly SkillGroup[]
   experience: readonly Job[]

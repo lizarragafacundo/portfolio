@@ -1,6 +1,8 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
+import { facundo } from '@lizdevs/desk-character/personas'
 import { describe, expect, it } from 'vitest'
+import { en, es } from '@/content'
 
 /**
  * The site is drawn in box-drawing characters, and the fonts that render them
@@ -72,5 +74,37 @@ describe('glyph coverage', () => {
       .sort()
 
     expect(report, 'no font on the page carries these — they will render in a fallback').toEqual([])
+  })
+
+  /**
+   * The scan above walks this repo's source tree, which is the right scope for
+   * everything we author — and blind to the one thing on the page we do not.
+   *
+   * The desk character's terminal renders strings from
+   * `@lizdevs/desk-character`: the shipped persona's prompts and output, plus
+   * the `▋` caret (U+258B). Those land in the prerendered HTML in this site's
+   * font, so they are subject to exactly the same subset, and a package upgrade
+   * that adds `⚡` to a prompt would shear the terminal apart with nothing in
+   * this repo changing.
+   *
+   * The `$ whoami` frame is overridden per locale in `content/`, so it is
+   * covered twice over — deliberately, since that is the frame most likely to
+   * pick up an accent or a separator.
+   */
+  it('only uses covered characters in the desk character terminal', () => {
+    const fromPackage = facundo.script.flatMap((frame) => [frame.prompt, ...frame.lines])
+    const fromContent = [...en.character.whoami, ...es.character.whoami]
+    const caret = '▋'
+
+    const uncovered = new Set<string>()
+    for (const text of [...fromPackage, ...fromContent, caret]) {
+      for (const char of text) {
+        const codePoint = char.codePointAt(0)
+        if (codePoint === undefined || isCovered(codePoint)) continue
+        uncovered.add(`U+${codePoint.toString(16).toUpperCase().padStart(4, '0')} (${char})`)
+      }
+    }
+
+    expect([...uncovered].sort()).toEqual([])
   })
 })

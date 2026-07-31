@@ -23,6 +23,15 @@ export const en = {
     stack: 'TypeScript · Node.js · AWS · Next.js · Python · AI / LLM',
   },
 
+  character: {
+    themeSwitch: 'Character palette',
+    themeMatrix: 'CRT',
+    themeLight: 'INK',
+    // Three full-width rows on a screen 22 characters wide. Lower case, because
+    // it is being typed into a shell, not printed on a business card.
+    whoami: ['facundo lizarraga', 'senior full-stack', 'buenos aires · remote'],
+  },
+
   about:
     "Full-stack engineer with five years building and running production TypeScript and Node.js systems on AWS serverless. I grew into the technical lead of a multi-tenant, white-label music-distribution SaaS used by around 5,000 people, and I've shipped a portfolio of AI products: LLM scoring pipelines, autonomous agents, and browser computer vision. I'm comfortable owning a system end to end, from MongoDB schema to Next.js UI to deploy.",
 

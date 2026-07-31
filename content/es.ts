@@ -23,6 +23,15 @@ export const es = {
     stack: 'TypeScript · Node.js · AWS · Next.js · Python · IA / LLM',
   },
 
+  character: {
+    themeSwitch: 'Paleta del personaje',
+    themeMatrix: 'CRT',
+    themeLight: 'TINTA',
+    // 'ingeniero full-stack' is 20 characters — the row is 22 wide, so 'senior'
+    // moves to the third line rather than being dropped.
+    whoami: ['facundo lizarraga', 'ingeniero full-stack', 'senior · buenos aires'],
+  },
+
   about:
     'Ingeniero full-stack con cinco años construyendo y operando sistemas de producción en TypeScript y Node.js sobre AWS serverless. Crecí hasta liderar técnicamente un SaaS multi-tenant y white-label de distribución musical usado por alrededor de 5.000 usuarios, y lancé un portfolio de productos de IA: pipelines de scoring con LLM, agentes autónomos y visión por computadora en el navegador. Cómodo tomando un sistema de punta a punta, del esquema en MongoDB a la UI en Next.js y el deploy.',
 

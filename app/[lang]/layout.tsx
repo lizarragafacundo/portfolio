@@ -6,6 +6,7 @@ import { MotionProvider } from '@/components/motion/motion-provider'
 import { getContent } from '@/content'
 import { isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { site } from '@/lib/site'
+import '@lizdevs/desk-character/styles.css'
 import '../globals.css'
 
 /**

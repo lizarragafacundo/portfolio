@@ -48,12 +48,23 @@ per-locale `lang` attribute possible.
 compile error. `tests/content-parity.test.ts` compares the whole tree, so a job
 added in English but missing in Spanish fails CI.
 
-**The animation budget is measured.** `/en` ships 17 KB of HTML and ~230 KB of
+**The animation budget is measured.** `/en` ships 23 KB of HTML and ~247 KB of
 JS gzipped, ~45 KB of it Motion — the commonly quoted "~5 KB" for `LazyMotion`
 does not survive contact with a real build. None of it is on the critical path:
 the page is complete and readable before any script runs. Only the two demo
 widgets hold state, and their logic lives in `lib/demo-state.ts` as pure
 functions of a tick, so server and client agree on the first frame.
+
+**The desk character is a separate package, and it renders on the server.**
+The scene above the hero comes from
+[`@lizdevs/desk-character`](https://github.com/facundo-lizdevs/desk-character) —
+~700 SVG nodes that draw themselves in, run a scripted terminal on the laptop,
+and dock to the corner as you scroll. It is 6 KB of the gzipped HTML above and
+none of the critical path: every node is static markup driven by CSS, so it
+paints before hydration and the client only wires up the interaction. It is
+`aria-hidden` throughout, because every skill its terminal names already exists
+as real text in `content.skills` — the terminal is a second, prettier rendering
+of published information, never the only copy.
 
 **The font is subsetted twice.** Google's `latin` subset of JetBrains Mono has
 no box drawing (U+2500–257F) or block elements (U+2580–259F), so those glyphs
@@ -78,6 +89,13 @@ CSS and Motion. A `<noscript>` rule restores the reveal styles without JS.
 | Colours               | the `@theme` block in `app/globals.css` |
 | Email, LinkedIn, name | `lib/site.ts`                           |
 | The CV PDFs           | `public/cv/`                            |
+
+The desk character is configured in two places. Its palette is mapped onto this
+site's OKLCH tokens in `components/sections/character-scene.tsx`, so changing
+`--color-ac` in `globals.css` restyles the drawing too. The commands it types
+live in the package's `personas/facundo.ts`, except the `$ whoami` frame, which
+is localised in `content/en.ts` and `content/es.ts` — the other six print tool
+names that are the same word in every language.
 
 ## Deployment
 

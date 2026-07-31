@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@lizdevs/desk-character':
+        specifier: file:../desk-character
+        version: file:../desk-character(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       motion:
         specifier: ^12.23.12
         version: 12.43.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -569,6 +572,13 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@lizdevs/desk-character@file:../desk-character':
+    resolution: {directory: ../desk-character, type: directory}
+    engines: {node: '>=20.9.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   '@napi-rs/wasm-runtime@1.2.1':
     resolution: {integrity: sha512-KjZdi8Q1wh89gsVmghvbrMgWl6ZWmRmHV6wjB7/g4Zf0dyO+hH3neZUtuDNPO00qq5YE5RITVWvrIZKRaAmzGQ==}
@@ -3425,6 +3435,11 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@lizdevs/desk-character@file:../desk-character(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
 
   '@napi-rs/wasm-runtime@1.2.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
