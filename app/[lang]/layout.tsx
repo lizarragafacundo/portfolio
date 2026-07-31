@@ -64,8 +64,8 @@ export function generateStaticParams() {
 export const dynamicParams = false
 
 export const viewport: Viewport = {
-  themeColor: '#0b0d10',
-  colorScheme: 'dark',
+  themeColor: '#f4f9fc',
+  colorScheme: 'light',
 }
 
 interface LayoutProps {
@@ -147,7 +147,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
       </head>
-      <body className="bg-bg text-fg font-mono antialiased">
+      <body className="bg-bg text-fg selection:bg-ac selection:text-bg font-mono antialiased">
         <MotionProvider>{children}</MotionProvider>
         <PersonJsonLd locale={lang} />
       </body>

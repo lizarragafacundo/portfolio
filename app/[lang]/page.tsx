@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { SiteNav } from '@/components/layout/site-nav'
 import { About } from '@/components/sections/about'
-import { CharacterScene } from '@/components/sections/character-scene'
 import { Contact } from '@/components/sections/contact'
 import { Education } from '@/components/sections/education'
 import { Experience } from '@/components/sections/experience'
@@ -38,16 +37,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
       <SiteNav locale={lang} content={content} />
 
-      {/*
-        Outside <main>, and deliberately: the scene is full-bleed, and <main> is
-        capped at 1080px with 24px gutters. It is also decoration — the whole
-        thing is `aria-hidden`, so putting it inside the landmark would add a
-        silent hole at the top of the document for a screen-reader user.
-      */}
-      <CharacterScene character={content.character} role={content.hero.role} />
-
       <main id="main" className="relative z-2 mx-auto max-w-[1080px] px-6">
-        <Hero hero={content.hero} />
+        <Hero hero={content.hero} character={content.character} />
 
         <About title={content.nav.about} body={content.about} />
 

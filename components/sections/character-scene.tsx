@@ -1,26 +1,30 @@
 'use client'
 
 import { useMemo } from 'react'
-import { DeskCharacter, THEMES, type Persona } from '@lizdevs/desk-character'
+import { DeskCharacter, type Persona } from '@lizdevs/desk-character'
 import { facundo } from '@lizdevs/desk-character/personas'
-import { useCharacterTheme } from '@/components/character/character-theme'
 import type { Content } from '@/content/types'
 
 /**
- * The `matrix` preset built out of this site's own OKLCH tokens rather than the
- * package's hardcoded approximations of them.
+ * The character's palette, built from this site's own tokens rather than the
+ * package's presets.
  *
- * This is the point of the whole theming layer: the character is drawn in
- * `--color-ac`, the exact green every other accent on the page uses, so it reads
- * as part of the design rather than as an illustration that was dropped into it.
- * If the palette in globals.css changes, the character follows automatically.
+ * This is the point of the theming layer: the drawing is stroked in
+ * `--color-ac`, the exact violet every border and bracket on the page uses, so
+ * it reads as part of the design rather than as an illustration dropped into
+ * it. Change the palette in globals.css and the character follows.
+ *
+ * `screen` is the deep teal (`--color-ac-alt`), not the violet. The terminal is
+ * the densest type in the drawing — six words at about 9px — and violet at that
+ * size on a cyan screen vibrates. The same reason body copy on this page is
+ * navy rather than the accent.
  */
-const MATRIX = {
+const THEME = {
   ink: 'var(--color-ac)',
   fill: 'var(--color-surface)',
   shade: 'var(--color-chip)',
-  tint: 'var(--color-surface-2)',
-  screen: 'var(--color-ac-bright)',
+  tint: 'var(--color-border-soft)',
+  screen: 'var(--color-ac-alt)',
   bg: 'transparent',
 } as const
 
@@ -31,8 +35,6 @@ interface Props {
 }
 
 export function CharacterScene({ character, role }: Props) {
-  const { theme } = useCharacterTheme()
-
   /**
    * Only the `whoami` frame is localised. The other six print tool names —
    * `terraform`, `eventbridge`, `qdrant` — which are the same word in every
@@ -53,9 +55,19 @@ export function CharacterScene({ character, role }: Props) {
   return (
     <DeskCharacter
       persona={persona}
-      theme={theme === 'matrix' ? MATRIX : THEMES.light}
-      dockMotion="Cascada"
-      className="relative z-1"
+      theme={THEME}
+      variant="portrait"
+      /*
+        No docking. The character lives in the hero's right column now, and a
+        drawing that leaps out of a two-column layout to pin itself to the
+        corner reads as a bug rather than as a flourish.
+      */
+      dock={false}
+      /*
+        Instead it glances at whichever section has scrolled into view. The
+        selector matches the six numbered <section>s that `Section` renders.
+      */
+      gazeSelector="main section[id]"
     />
   )
 }

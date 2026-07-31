@@ -75,12 +75,6 @@ export interface Education {
  * language, and live in the persona inside `@lizdevs/desk-character`.
  */
 export interface Character {
-  /** Accessible name for the palette toggle in the nav. */
-  themeSwitch: string
-  /** Label for the terminal-green palette. */
-  themeMatrix: string
-  /** Label for the original violet-on-ice palette. */
-  themeLight: string
   /** Exactly three lines — the `$ whoami` frame is a full-width `list`. */
   whoami: readonly [string, string, string]
 }

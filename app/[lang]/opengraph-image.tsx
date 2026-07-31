@@ -9,6 +9,25 @@ export const alt = 'Facundo Lizarraga — Senior Full-Stack Engineer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
+/**
+ * The palette, repeated as literals.
+ *
+ * Satori renders this tree outside the browser: there is no stylesheet, no
+ * cascade, and no custom properties, so `var(--color-ac)` resolves to nothing
+ * and the text comes out black. These values must be kept in step with the
+ * `@theme` block in `app/globals.css` by hand — hence one block rather than
+ * eleven scattered string literals.
+ */
+const OG = {
+  bg: '#f4f9fc',
+  grid: 'rgba(96,0,203,0.07)',
+  gridSoft: 'rgba(96,0,203,0.055)',
+  ink: '#6000cb',
+  text: '#0f1b61',
+  mute: '#105d67',
+  faint: '#5b8f99',
+} as const
+
 /** One card per locale, both rendered at build time. */
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }))
@@ -37,15 +56,14 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '72px 80px',
-        backgroundColor: '#0b0e11',
-        backgroundImage:
-          'linear-gradient(90deg, rgba(52,211,153,0.07) 1px, transparent 1px), linear-gradient(180deg, rgba(52,211,153,0.055) 1px, transparent 1px)',
+        backgroundColor: OG.bg,
+        backgroundImage: `linear-gradient(90deg, ${OG.grid} 1px, transparent 1px), linear-gradient(180deg, ${OG.gridSoft} 1px, transparent 1px)`,
         backgroundSize: '46px 46px',
         fontFamily: 'JetBrains Mono',
-        color: '#f1f3f4',
+        color: OG.text,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, color: '#34d399' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16, color: OG.ink }}>
         <div
           style={{
             display: 'flex',
@@ -53,7 +71,7 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
             justifyContent: 'center',
             width: 46,
             height: 46,
-            border: '2px solid #34d399',
+            border: `2px solid ${OG.ink}`,
             fontSize: 22,
           }}
         >
@@ -67,15 +85,13 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
       <div style={{ fontSize: 82, letterSpacing: -1, marginTop: 40, lineHeight: 1.05 }}>
         FACUNDO
       </div>
-      <div style={{ fontSize: 82, letterSpacing: 14, color: '#34d399', lineHeight: 1.05 }}>
+      <div style={{ fontSize: 82, letterSpacing: 14, color: OG.ink, lineHeight: 1.05 }}>
         LIZARRAGA
       </div>
 
-      <div
-        style={{ fontSize: 32, color: '#34d399', marginTop: 36 }}
-      >{`> ${content.hero.role}`}</div>
-      <div style={{ fontSize: 24, color: '#94a3a0', marginTop: 14 }}>{content.hero.location}</div>
-      <div style={{ fontSize: 22, color: '#6b7a78', marginTop: 28 }}>{content.hero.stack}</div>
+      <div style={{ fontSize: 32, color: OG.ink, marginTop: 36 }}>{`> ${content.hero.role}`}</div>
+      <div style={{ fontSize: 24, color: OG.mute, marginTop: 14 }}>{content.hero.location}</div>
+      <div style={{ fontSize: 22, color: OG.faint, marginTop: 28 }}>{content.hero.stack}</div>
     </div>,
     {
       ...size,

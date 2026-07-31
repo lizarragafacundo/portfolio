@@ -56,15 +56,26 @@ widgets hold state, and their logic lives in `lib/demo-state.ts` as pure
 functions of a tick, so server and client agree on the first frame.
 
 **The desk character is a separate package, and it renders on the server.**
-The scene above the hero comes from
+The right half of the hero comes from
 [`@lizdevs/desk-character`](https://github.com/facundo-lizdevs/desk-character) —
 ~700 SVG nodes that draw themselves in, run a scripted terminal on the laptop,
-and dock to the corner as you scroll. It is 6 KB of the gzipped HTML above and
-none of the critical path: every node is static markup driven by CSS, so it
-paints before hydration and the client only wires up the interaction. It is
-`aria-hidden` throughout, because every skill its terminal names already exists
-as real text in `content.skills` — the terminal is a second, prettier rendering
-of published information, never the only copy.
+blink, follow the cursor, and glance at whichever section you scroll to. It is
+6 KB of the gzipped HTML above and none of the critical path: every node is
+static markup driven by CSS, so it paints before hydration and the client only
+wires up the interaction. It is `aria-hidden` throughout, because every skill
+its terminal names already exists as real text in `content.skills` — the
+terminal is a second, prettier rendering of published information, never the
+only copy.
+
+**Body text is navy; the accent draws lines.** The palette is violet ink on cool
+paper, and the single decision that makes it work is that `--color-ac` never
+sets a paragraph. A saturated hue is right for a 1px rule, a border box and a
+heading; at paragraph length it vibrates and stops being readable after two
+sentences. So violet draws every chip, bracket and rule, `--color-fg` (navy,
+14.7:1) does the reading, and `--color-ac-alt` (deep teal) covers the cases
+where violet lands on dense small type — including the terminal on the
+character's laptop. Every foreground token clears AA at the size it is used;
+the source palette's own subtext sits at 2.05:1 and is only safe as a fill.
 
 **The font is subsetted twice.** Google's `latin` subset of JetBrains Mono has
 no box drawing (U+2500–257F) or block elements (U+2580–259F), so those glyphs
@@ -91,11 +102,16 @@ CSS and Motion. A `<noscript>` rule restores the reveal styles without JS.
 | The CV PDFs           | `public/cv/`                            |
 
 The desk character is configured in two places. Its palette is mapped onto this
-site's OKLCH tokens in `components/sections/character-scene.tsx`, so changing
+site's tokens in `components/sections/character-scene.tsx`, so changing
 `--color-ac` in `globals.css` restyles the drawing too. The commands it types
 live in the package's `personas/facundo.ts`, except the `$ whoami` frame, which
 is localised in `content/en.ts` and `content/es.ts` — the other six print tool
 names that are the same word in every language.
+
+`app/[lang]/opengraph-image.tsx` repeats the palette as literals. Satori renders
+that card outside the browser, with no stylesheet and no custom properties, so
+`var(--color-ac)` there resolves to nothing and the text comes out black. Its
+`OG` block has to be updated by hand alongside the `@theme` block.
 
 ## Deployment
 

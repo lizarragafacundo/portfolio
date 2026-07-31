@@ -13,15 +13,25 @@ function renderSection(ui: React.ReactElement) {
 
 describe('Hero', () => {
   it('exposes a real, readable name even though the banner is ASCII', () => {
-    renderSection(<Hero hero={en.hero} />)
+    renderSection(<Hero hero={en.hero} character={en.character} />)
 
     const heading = screen.getByRole('heading', { level: 1 })
     expect(heading).toHaveTextContent('Facundo Lizarraga')
     expect(heading).toHaveTextContent(en.hero.role)
   })
 
+  it('puts the character beside the text, not above it', () => {
+    const { container } = renderSection(<Hero hero={en.hero} character={en.character} />)
+
+    // The drawing is a sibling of the text column inside one grid, which is
+    // what keeps them side by side; nesting it would make it flow with the copy.
+    const grid = container.querySelector('.grid')
+    expect(grid?.children).toHaveLength(2)
+    expect(grid?.querySelector('.dc-scene')).not.toBeNull()
+  })
+
   it('hides the decorative ASCII from assistive technology', () => {
-    const { container } = renderSection(<Hero hero={en.hero} />)
+    const { container } = renderSection(<Hero hero={en.hero} character={en.character} />)
 
     const art = container.querySelectorAll('pre')
     expect(art.length).toBeGreaterThan(0)

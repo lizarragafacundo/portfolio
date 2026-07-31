@@ -1,16 +1,13 @@
 import Link from 'next/link'
-import { CharacterThemeToggle } from '@/components/character/character-theme-toggle'
 import type { Content } from '@/content/types'
 import { cn } from '@/lib/cn'
 import { type Locale, resumeHref } from '@/lib/i18n'
 import { site } from '@/lib/site'
 
 /**
- * Fixed header, server-rendered apart from the character palette switch. The
- * language switch is a real <Link> to the other locale's static page, not a
- * client-side toggle, so it costs zero JS and gives each language a shareable
- * URL — which is also why it is not merged with the palette switch next to it,
- * despite them looking the same.
+ * Fixed header. Fully server-rendered: the language switch is a real <Link>
+ * to the other locale's static page, not a client-side toggle, so it costs
+ * zero JS and gives each language a shareable URL.
  */
 export function SiteNav({ locale, content }: { locale: Locale; content: Content }) {
   const links = [
@@ -62,18 +59,6 @@ export function SiteNav({ locale, content }: { locale: Locale; content: Content 
           <LangLink target="en" current={locale} />
           <LangLink target="es" current={locale} />
         </div>
-
-        {/*
-          The one client component in this header. It is a sibling of the
-          language switch and styled identically, because they are the same kind
-          of control — a two-state switch — and the eye should not have to learn
-          two vocabularies for that.
-        */}
-        <CharacterThemeToggle
-          label={content.character.themeSwitch}
-          matrixLabel={content.character.themeMatrix}
-          lightLabel={content.character.themeLight}
-        />
 
         <a
           href={resumeHref(locale)}
