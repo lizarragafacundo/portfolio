@@ -67,15 +67,22 @@ its terminal names already exists as real text in `content.skills` — the
 terminal is a second, prettier rendering of published information, never the
 only copy.
 
-**Body text is navy; the accent draws lines.** The palette is violet ink on cool
-paper, and the single decision that makes it work is that `--color-ac` never
-sets a paragraph. A saturated hue is right for a 1px rule, a border box and a
-heading; at paragraph length it vibrates and stops being readable after two
-sentences. So violet draws every chip, bracket and rule, `--color-fg` (navy,
-14.7:1) does the reading, and `--color-ac-alt` (deep teal) covers the cases
-where violet lands on dense small type — including the terminal on the
-character's laptop. Every foreground token clears AA at the size it is used;
-the source palette's own subtext sits at 2.05:1 and is only safe as a fill.
+**Green is for structure; silver does the reading.** The palette is cmd's:
+`#0c0c0c` background, `#cccccc` body text, `#16c60c` accent. The one decision
+that makes it work is that the accent never sets a paragraph — it draws the
+brackets, rules, prompts, chips and section numbers, and that is all. Green at
+paragraph length vibrates against black and stops being readable after two
+sentences, which is why the FIGlet banner is silver too and only the `>` role
+line under it is green. `--color-ac-alt` is cmd's blue, kept for the rare label
+that has to sit apart from the green.
+
+**The font is cmd's font.** `Consolas, 'Lucida Console'` lead `--font-mono`, so
+on Windows the whole page renders in the same face as the terminal it is
+imitating. Elsewhere the stack falls through to the self-hosted JetBrains Mono
+pair below, which is why those are still loaded: they are the guarantee that the
+box-drawing art keeps a consistent advance width on machines that have neither
+Microsoft font. Fonts are never mixed within a line — each candidate in the
+stack carries the full box-drawing range on its own.
 
 **The font is subsetted twice.** Google's `latin` subset of JetBrains Mono has
 no box drawing (U+2500–257F) or block elements (U+2580–259F), so those glyphs
@@ -110,8 +117,8 @@ names that are the same word in every language.
 
 `app/[lang]/opengraph-image.tsx` repeats the palette as literals. Satori renders
 that card outside the browser, with no stylesheet and no custom properties, so
-`var(--color-ac)` there resolves to nothing and the text comes out black. Its
-`OG` block has to be updated by hand alongside the `@theme` block.
+`var(--color-ac)` there resolves to nothing. Its `OG` block has to be updated by
+hand alongside the `@theme` block.
 
 ## Deployment
 

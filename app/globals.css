@@ -1,75 +1,37 @@
 @import 'tailwindcss';
 
-/*
- * Single fixed palette: "Tinta" — violet ink on cool paper.
- *
- * The structure is deliberate and it is the whole reason this reads as a
- * document rather than a terminal: **body text is navy, not the accent.**
- * A saturated hue is right for a 1px rule, a 30px border box and a heading; at
- * paragraph length it vibrates against the background and stops being readable
- * after about two sentences. So `--color-ac` (violet) draws every line, chip and
- * bracket on the page, and `--color-fg` (navy) does all the actual reading.
- *
- * `--color-ac-alt` is the deep teal, and it is the one to reach for when violet
- * lands on dense small type — it carries the same "this is a link/label" signal
- * at a fraction of the chroma.
- *
- * Kept in hex rather than OKLCH because these are sampled values, and rewriting
- * a sampled colour into a wider gamut is how a palette drifts away from the
- * thing it was taken from.
- */
 @theme {
-  --color-bg: #f4f9fc;
-  --color-bg-deep: #eaf3f8;
-  --color-surface: #ffffff;
-  --color-surface-2: #f0f7fb;
-  --color-chip: #e3f1f8;
+  --color-bg: #0c0c0c;
+  --color-bg-deep: #080808;
+  --color-surface: #161616;
+  --color-surface-2: #121212;
+  --color-chip: #1e1e1e;
 
-  /* Contrast against --color-bg: 14.7 / 11.4 / 7.0 / 4.6. All pass AA at the
-     sizes they are used, including --color-fg-faint at 11px in the footer.
-     The source palette's own subtext (#73bbc5) sits at 2.05 and is only safe as
-     a fill or a rule — it is --color-fg-faint's darker cousin below. */
-  --color-fg: #0f1b61;
-  --color-fg-dim: #24307a;
-  --color-fg-mute: #105d67;
-  --color-fg-faint: #3d7b85;
+  --color-fg: #cccccc;
+  --color-fg-dim: #b0b0b0;
+  --color-fg-mute: #8a8a8a;
+  --color-fg-faint: #6e6e6e;
 
-  --color-border: #bfdfec;
-  --color-border-soft: #d7eef7;
+  --color-border: #333333;
+  --color-border-soft: #262626;
 
-  /* "bright" means *more emphatic*, not lighter. On paper the emphatic version
-     of a colour is the darker one, so --color-ac-bright is deeper than --color-ac
-     — the token names are inherited from the dark palette and every usage
-     (stat figures, project titles) wants exactly this. */
-  --color-ac: #6000cb;
-  --color-ac-bright: #4a009c;
-  --color-ac-dim: #9a6ae0;
-  --color-ac-alt: #105d67;
-  --color-warn: #b25000;
+  --color-ac: #16c60c;
+  --color-ac-bright: #3ff23a;
+  --color-ac-dim: #0f8c08;
+  --color-ac-alt: #3a96dd;
+  --color-warn: #c19c00;
 
-  /*
-   * Order matters. The box-drawing subset only contains U+2500–25FF and a few
-   * arrows, so listing it first means the browser resolves ASCII-art glyphs
-   * there and falls through to the full family for every other character.
-   * Both are JetBrains Mono at a 0.6em advance, so a line mixing the two
-   * still lines up perfectly. See app/[lang]/layout.tsx for the why.
-   */
   --font-mono:
-    var(--font-jetbrains-mono-box), var(--font-jetbrains-mono), ui-monospace, 'SFMono-Regular',
-    'Courier New', monospace;
+    Consolas, 'Lucida Console', var(--font-jetbrains-mono-box), var(--font-jetbrains-mono), Menlo,
+    'DejaVu Sans Mono', ui-monospace, monospace;
 
-  /*
-   * On a dark page "glow" was a light bloom. On paper there is nothing to bloom
-   * into, so the same token becomes a soft violet drop shadow — the emphasis
-   * survives the palette flip, the neon does not.
-   */
-  --shadow-glow: 0 2px 10px rgb(96 0 203 / 0.14);
-  --text-shadow-glow: 0 1px 0 rgb(96 0 203 / 0.12);
+  --shadow-glow: 0 0 12px rgb(22 198 12 / 0.35);
+  --text-shadow-glow: 0 0 10px rgb(22 198 12 / 0.4);
 }
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
     /* The fixed nav is 61px tall; anchor jumps must clear it. */
     scroll-padding-top: 6rem;
   }
@@ -87,17 +49,6 @@
     text-rendering: optimizeLegibility;
   }
 
-  /*
-   * Backdrop: a 46px grid, painted once as a fixed pseudo-element. A
-   * pseudo-element (rather than two extra <div>s) keeps the DOM clean and stays
-   * off the compositor's paint path while scrolling.
-   *
-   * The dark palette's scanline layer is gone. Scanlines are a CRT artefact —
-   * on paper they are just horizontal stripes across the text, and at any alpha
-   * strong enough to see they make body copy noticeably harder to read. What
-   * survives is the grid, which reads as graph paper and does the same job of
-   * stopping the background from being a flat void.
-   */
   body::before {
     content: '';
     position: fixed;
@@ -107,36 +58,39 @@
     background-color: var(--color-bg);
     background-image:
       repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgb(22 198 12 / 0.022) 2px,
+        rgb(22 198 12 / 0.022) 4px
+      ),
+      repeating-linear-gradient(
         90deg,
-        rgb(96 0 203 / 0.055) 0px,
+        rgb(22 198 12 / 0.05) 0px,
         transparent 1px,
         transparent 45px,
-        rgb(96 0 203 / 0.055) 46px
+        rgb(22 198 12 / 0.05) 46px
       ),
       repeating-linear-gradient(
         180deg,
-        rgb(96 0 203 / 0.045) 0px,
+        rgb(22 198 12 / 0.04) 0px,
         transparent 1px,
         transparent 45px,
-        rgb(96 0 203 / 0.045) 46px
+        rgb(22 198 12 / 0.04) 46px
       );
     background-size:
+      100% 100%,
       46px 46px,
       46px 46px;
   }
 
-  /*
-   * Vignette, so the grid fades out toward the edges. Inverted for paper: it
-   * washes to white at the corners instead of falling to black, which keeps the
-   * page feeling lit rather than tunnelled.
-   */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 50%, rgb(244 249 252 / 0.85) 100%);
+    background: radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 0.62) 100%);
   }
 
   ::selection {

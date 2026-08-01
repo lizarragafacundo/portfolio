@@ -24,8 +24,6 @@ export const es = {
   },
 
   character: {
-    // 'ingeniero full-stack' is 20 characters — the row is 22 wide, so 'senior'
-    // moves to the third line rather than being dropped.
     whoami: ['facundo lizarraga', 'ingeniero full-stack', 'senior · buenos aires'],
   },
 

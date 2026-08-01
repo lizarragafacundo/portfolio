@@ -64,8 +64,8 @@ export function generateStaticParams() {
 export const dynamicParams = false
 
 export const viewport: Viewport = {
-  themeColor: '#f4f9fc',
-  colorScheme: 'light',
+  themeColor: '#0c0c0c',
+  colorScheme: 'dark',
 }
 
 interface LayoutProps {

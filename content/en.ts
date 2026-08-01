@@ -24,8 +24,6 @@ export const en = {
   },
 
   character: {
-    // Three full-width rows on a screen 22 characters wide. Lower case, because
-    // it is being typed into a shell, not printed on a business card.
     whoami: ['facundo lizarraga', 'senior full-stack', 'buenos aires · remote'],
   },
 

@@ -19,13 +19,13 @@ export const contentType = 'image/png'
  * eleven scattered string literals.
  */
 const OG = {
-  bg: '#f4f9fc',
-  grid: 'rgba(96,0,203,0.07)',
-  gridSoft: 'rgba(96,0,203,0.055)',
-  ink: '#6000cb',
-  text: '#0f1b61',
-  mute: '#105d67',
-  faint: '#5b8f99',
+  bg: '#0c0c0c',
+  grid: 'rgba(22,198,12,0.06)',
+  gridSoft: 'rgba(22,198,12,0.05)',
+  ink: '#16c60c',
+  text: '#cccccc',
+  mute: '#8a8a8a',
+  faint: '#6e6e6e',
 } as const
 
 /** One card per locale, both rendered at build time. */
