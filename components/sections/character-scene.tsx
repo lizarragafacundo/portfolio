@@ -1,18 +1,11 @@
 'use client'
 
 import { useMemo } from 'react'
-import { DeskCharacter, type Persona } from '@lizdevs/desk-character'
-import { facundo } from '@lizdevs/desk-character/personas'
+import { PortfolioCharacter, type Persona } from '@facundolizarraga/portfolio-characters'
+import { facundo } from '@facundolizarraga/portfolio-characters/personas'
+import { useCharacter } from '@/components/character/character-provider'
 import type { Content } from '@/content/types'
-
-const THEME = {
-  ink: 'var(--color-ac)',
-  fill: 'var(--color-surface)',
-  shade: 'var(--color-chip)',
-  tint: 'var(--color-surface-2)',
-  screen: 'var(--color-ac)',
-  bg: 'transparent',
-} as const
+import { inkOnPaper } from '@/components/character/ink-on-paper'
 
 interface Props {
   character: Content['character']
@@ -20,6 +13,8 @@ interface Props {
 }
 
 export const CharacterScene = ({ character, role }: Props) => {
+  const { appearance } = useCharacter()
+
   const persona = useMemo<Persona>(() => {
     const [whoami, ...rest] = facundo.script
     if (!whoami) return facundo
@@ -31,11 +26,12 @@ export const CharacterScene = ({ character, role }: Props) => {
   }, [character, role])
 
   return (
-    <DeskCharacter
+    <PortfolioCharacter
       persona={persona}
-      theme={THEME}
+      {...appearance}
+      theme={inkOnPaper}
       variant="desk"
-      dock={false}
+      dock
       gazeSelector="main section[id]"
     />
   )
