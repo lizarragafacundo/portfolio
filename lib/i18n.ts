@@ -8,12 +8,14 @@ export function isLocale(value: string): value is Locale {
   return (LOCALES as readonly string[]).includes(value)
 }
 
-/** The locale to switch *to* — the site only has two, so this is a toggle. */
 export function otherLocale(locale: Locale): Locale {
   return locale === 'en' ? 'es' : 'en'
 }
 
-/** Path to the CV matching the current locale. */
+export function packagesHref(locale: Locale, slug: string): string {
+  return `/${locale}/packages/${slug}`
+}
+
 export function resumeHref(locale: Locale): string {
   return locale === 'es' ? '/cv/Facundo-Lizarraga-ES.pdf' : '/cv/Facundo-Lizarraga-EN.pdf'
 }

@@ -132,6 +132,20 @@ export const en = {
     stack: ['FastAPI', 'Ollama', 'AWS Lambda', 'Step Functions', 'MongoDB', 'Next.js'],
   },
 
+  characterPackage: {
+    name: '@facundolizarraga/portfolio-characters',
+    kind: 'open-source npm package · solo',
+    description:
+      'The character on this page, extracted into a React library anyone can install. Every part is data rather than markup — 12 skin tones, 13 hairstyles, 12 eye styles, 6 mouths, 5 beards, 6 glasses and 14 presets — so adding artwork never means touching a component. It ships a character builder, server-renders in full, and honours reduced-motion.',
+    stack: ['React', 'TypeScript', 'SVG', 'tsup', 'Vitest', 'npm'],
+    install: 'npm i @facundolizarraga/portfolio-characters',
+    repoUrl: 'https://github.com/lizarragafacundo/portfolio-characters',
+    builderLabel: 'Open the builder',
+    randomLabel: 'Random',
+    resetLabel: 'Reset to me',
+    demoCaption: 'Changes this portrait and the character following you down the page.',
+  },
+
   smallProjects: [
     {
       title: 'Coder Internal Developer Platform',

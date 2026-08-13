@@ -15,11 +15,6 @@ export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }))
 }
 
-/**
- * A Server Component start to finish. Every string below is baked into the
- * prerendered HTML — the only JS shipped is the motion wrappers and the two
- * demo widgets.
- */
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
@@ -46,8 +41,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
         <Projects
           title={content.nav.projects}
+          locale={lang}
           posture={content.posture}
           marktboost={content.marktboost}
+          characterPackage={content.characterPackage}
           small={content.smallProjects}
         />
 

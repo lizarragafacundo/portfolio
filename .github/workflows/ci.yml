@@ -18,12 +18,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
@@ -52,3 +50,15 @@ jobs:
             || { echo "::error::/en HTML is missing its content — SSG regressed"; exit 1; }
           grep -q "Ingeniero Full-Stack Senior" .next/server/app/es.html \
             || { echo "::error::/es HTML is missing its content — SSG regressed"; exit 1; }
+          for lang in en es; do
+            page=".next/server/app/$lang/packages/character.html"
+            test -f "$page" \
+              || { echo "::error::/$lang/packages/character was not prerendered"; exit 1; }
+            grep -q "pcb-builder" "$page" \
+              || { echo "::error::the builder is missing from $page"; exit 1; }
+          done
+
+      - name: Assert the character stays decorative
+        run: |
+          grep -q 'aria-hidden="true"' .next/server/app/en.html \
+            || { echo "::error::the character is no longer hidden from assistive tech"; exit 1; }

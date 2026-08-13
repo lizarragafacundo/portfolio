@@ -1,0 +1,43 @@
+/*
+ * The site palette as it stands today (source: app/globals.css, @theme block).
+ * "Ink on paper" — warm off-white grounds, near-black text, one navy accent.
+ */
+:root {
+  /* Grounds */
+  --color-bg: #e9e7df; /* page background */
+  --color-bg-deep: #dedbd0; /* recessed bands */
+  --color-surface: #f3f1e9; /* cards, panels */
+  --color-surface-2: #e2dfd4; /* secondary surface */
+  --color-chip: #d4d0c4; /* tags, chips */
+
+  /* Text */
+  --color-fg: #20242b;
+  --color-fg-dim: #3f4650;
+  --color-fg-mute: #626a74;
+  --color-fg-faint: #7f858b;
+
+  /* Lines */
+  --color-border: #a8a59b;
+  --color-border-soft: #c7c3b8;
+
+  /* Accent */
+  --color-ac: #244d73; /* navy — links, headings, the character's ink */
+  --color-ac-bright: #163f67;
+  --color-ac-dim: #5d7892;
+  --color-ac-alt: #8a4f35; /* rust, used sparingly */
+  --color-warn: #8a6516;
+}
+
+/*
+ * The character takes six roles, mapped from the tokens above in
+ * components/sections/character-scene.tsx. This is the whole colour surface
+ * of the illustration — there are no other hardcoded colours in it.
+ */
+.desk-character-theme {
+  --dc-ink: var(--color-ac); /* #244d73 — every stroke, the whole line drawing */
+  --dc-fill: var(--color-surface); /* #f3f1e9 — flat fills inside the strokes */
+  --dc-shade: var(--color-chip); /* #d4d0c4 — shadow / darker planes */
+  --dc-tint: var(--color-surface-2); /* #e2dfd4 — the 45° hatch on the floor band */
+  --dc-screen: var(--color-ac); /* #244d73 — laptop screen text */
+  --dc-bg: transparent; /* the scene sits on the page background */
+}

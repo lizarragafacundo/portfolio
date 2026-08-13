@@ -1,19 +1,31 @@
+import Link from 'next/link'
+import { CharacterDemo } from '@/components/demos/character-demo'
 import { PipelineDemo } from '@/components/demos/pipeline-demo'
 import { PostureDemo } from '@/components/demos/posture-demo'
 import { Reveal } from '@/components/motion/reveal'
 import { Stagger, StaggerItem } from '@/components/motion/stagger'
 import { Section } from '@/components/ui/section'
 import { Tag } from '@/components/ui/tag'
-import type { FeaturedProject, SmallProject } from '@/content/types'
+import type { FeaturedProject, PackageProject, SmallProject } from '@/content/types'
+import { packagesHref, type Locale } from '@/lib/i18n'
 
 interface ProjectsProps {
   title: string
+  locale: Locale
   posture: FeaturedProject
   marktboost: FeaturedProject
+  characterPackage: PackageProject
   small: readonly SmallProject[]
 }
 
-export function Projects({ title, posture, marktboost, small }: ProjectsProps) {
+export function Projects({
+  title,
+  locale,
+  posture,
+  marktboost,
+  characterPackage,
+  small,
+}: ProjectsProps) {
   return (
     <Section id="projects" title={title} index="03">
       <Reveal>
@@ -22,6 +34,38 @@ export function Projects({ title, posture, marktboost, small }: ProjectsProps) {
 
       <Reveal>
         <Featured project={marktboost} demo={<PipelineDemo />} demoFirst />
+      </Reveal>
+
+      <Reveal>
+        <Featured
+          project={characterPackage}
+          demo={
+            <CharacterDemo
+              randomLabel={characterPackage.randomLabel}
+              resetLabel={characterPackage.resetLabel}
+              caption={characterPackage.demoCaption}
+            />
+          }
+          footer={
+            <div className="border-border mt-4.5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-dashed pt-3.5">
+              <code className="text-fg-mute text-[11px]">{characterPackage.install}</code>
+              <Link
+                href={packagesHref(locale, 'character')}
+                className="text-ac hover:text-ac-bright text-[11px] font-bold tracking-[0.08em] uppercase"
+              >
+                {characterPackage.builderLabel} →
+              </Link>
+              <a
+                href={characterPackage.repoUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-fg-mute hover:text-ac text-[11px] font-bold tracking-[0.08em] uppercase"
+              >
+                GitHub →
+              </a>
+            </div>
+          }
+        />
       </Reveal>
 
       <Stagger className="grid gap-4 sm:grid-cols-2">
@@ -35,18 +79,16 @@ export function Projects({ title, posture, marktboost, small }: ProjectsProps) {
   )
 }
 
-/**
- * A featured project: prose on one side, its live demo on the other.
- * `demoFirst` alternates the two so consecutive cards do not look identical.
- */
 function Featured({
   project,
   demo,
   demoFirst = false,
+  footer,
 }: {
   project: FeaturedProject
   demo: React.ReactNode
   demoFirst?: boolean
+  footer?: React.ReactNode
 }) {
   const info = (
     <div className="border-border border-b p-7 md:border-b-0 md:[&:not(:last-child)]:border-r">
@@ -64,6 +106,8 @@ function Featured({
           </li>
         ))}
       </ul>
+
+      {footer}
     </div>
   )
 

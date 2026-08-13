@@ -132,6 +132,20 @@ export const es = {
     stack: ['FastAPI', 'Ollama', 'AWS Lambda', 'Step Functions', 'MongoDB', 'Next.js'],
   },
 
+  characterPackage: {
+    name: '@facundolizarraga/portfolio-characters',
+    kind: 'paquete npm open-source · en solitario',
+    description:
+      'El personaje de esta página, extraído como una librería de React que cualquiera puede instalar. Cada parte es data en vez de markup — 12 tonos de piel, 13 peinados, 12 estilos de ojos, 6 bocas, 5 barbas, 6 anteojos y 14 presets — así que agregar dibujo nunca implica tocar un componente. Incluye un editor de personajes, se renderiza entero en el servidor y respeta reduced-motion.',
+    stack: ['React', 'TypeScript', 'SVG', 'tsup', 'Vitest', 'npm'],
+    install: 'npm i @facundolizarraga/portfolio-characters',
+    repoUrl: 'https://github.com/lizarragafacundo/portfolio-characters',
+    builderLabel: 'Abrir el editor',
+    randomLabel: 'Aleatorio',
+    resetLabel: 'Volver a mí',
+    demoCaption: 'Cambia este retrato y el personaje que te sigue por la página.',
+  },
+
   smallProjects: [
     {
       title: 'Plataforma Interna de Desarrollo sobre Coder',
