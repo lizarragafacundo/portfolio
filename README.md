@@ -1,4 +1,4 @@
-# ASCII Portfolio
+# My Portfolio
 
 Terminal-flavoured personal site for **Facundo Lizarraga** — Senior Full-Stack Engineer.
 Bilingual (EN / ES), statically generated, and built to load as fast as a text file.
