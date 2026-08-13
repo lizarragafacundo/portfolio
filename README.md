@@ -15,6 +15,15 @@ Bilingual (EN / ES), statically generated, and built to load as fast as a text f
 Next.js 16 (App Router, React 19) · TypeScript `strict` · Tailwind CSS v4 ·
 `motion` v12 behind `LazyMotion` · Vitest · deployed on Vercel.
 
+![The home page](assets/screenshots/home.png)
+
+The character at the desk is
+[`@facundolizarraga/portfolio-characters`](https://www.npmjs.com/package/@facundolizarraga/portfolio-characters),
+a package this site publishes and then installs from npm. Its builder gets a
+page of its own:
+
+![The character builder](assets/screenshots/character-builder.png)
+
 ## Getting started
 
 ```bash
@@ -55,26 +64,32 @@ the page is complete and readable before any script runs. Only the two demo
 widgets hold state, and their logic lives in `lib/demo-state.ts` as pure
 functions of a tick, so server and client agree on the first frame.
 
-**The desk character is a separate package, and it renders on the server.**
+**The desk character is a published package, and it renders on the server.**
 The right half of the hero comes from
-[`@lizdevs/desk-character`](https://github.com/facundo-lizdevs/desk-character) —
-~700 SVG nodes that draw themselves in, run a scripted terminal on the laptop,
-blink, follow the cursor, and glance at whichever section you scroll to. It is
-6 KB of the gzipped HTML above and none of the critical path: every node is
-static markup driven by CSS, so it paints before hydration and the client only
-wires up the interaction. It is `aria-hidden` throughout, because every skill
-its terminal names already exists as real text in `content.skills` — the
-terminal is a second, prettier rendering of published information, never the
-only copy.
+[`@facundolizarraga/portfolio-characters`](https://github.com/lizarragafacundo/portfolio-characters),
+installed from npm like any other dependency — ~700 SVG nodes that draw
+themselves in, run a scripted terminal on the laptop, blink, follow the cursor,
+and glance at whichever section you scroll to. It is 6 KB of the gzipped HTML
+above and none of the critical path: every node is static markup driven by CSS,
+so it paints before hydration and the client only wires up the interaction. It
+is `aria-hidden` throughout, because every skill its terminal names already
+exists as real text in `content.skills` — the terminal is a second, prettier
+rendering of published information, never the only copy.
 
-**Green is for structure; silver does the reading.** The palette is cmd's:
-`#0c0c0c` background, `#cccccc` body text, `#16c60c` accent. The one decision
-that makes it work is that the accent never sets a paragraph — it draws the
-brackets, rules, prompts, chips and section numbers, and that is all. Green at
-paragraph length vibrates against black and stops being readable after two
-sentences, which is why the FIGlet banner is silver too and only the `>` role
-line under it is green. `--color-ac-alt` is cmd's blue, kept for the rare label
-that has to sit apart from the green.
+`/[lang]/packages/character` mounts the builder the package ships, so the same
+library that draws the hero also powers a page where you can rebuild the
+character part by part. `CharacterProvider` holds that appearance for the whole
+site, which is why randomising it on the projects card also changes the
+character docked in the corner.
+
+**Navy is for structure; near-black does the reading.** The palette is ink on
+paper: `#e9e7df` background, `#20242b` body text, `#244d73` accent. The one
+decision that makes it work is that the accent never sets a paragraph — it draws
+the brackets, rules, prompts, chips and section numbers, and that is all. The
+drawing follows the same rule: `components/character/ink-on-paper.ts` maps the
+package's theme onto these tokens, so the character is literally inked in
+`--color-ac`. `--color-ac-alt` is a rust, kept for the rare label that has to sit
+apart from the navy.
 
 **The font is cmd's font.** `Consolas, 'Lucida Console'` lead `--font-mono`, so
 on Windows the whole page renders in the same face as the terminal it is
@@ -109,7 +124,7 @@ CSS and Motion. A `<noscript>` rule restores the reveal styles without JS.
 | The CV PDFs           | `public/cv/`                            |
 
 The desk character is configured in two places. Its palette is mapped onto this
-site's tokens in `components/sections/character-scene.tsx`, so changing
+site's tokens in `components/character/ink-on-paper.ts`, so changing
 `--color-ac` in `globals.css` restyles the drawing too. The commands it types
 live in the package's `personas/facundo.ts`, except the `$ whoami` frame, which
 is localised in `content/en.ts` and `content/es.ts` — the other six print tool
