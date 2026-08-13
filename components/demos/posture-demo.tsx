@@ -6,10 +6,6 @@ import { POSE_FIGURE } from '@/content/ascii'
 import { useTick } from '@/hooks/use-tick'
 import { postureState } from '@/lib/demo-state'
 
-/**
- * Live mock of the Posture scoring loop. One of only two client islands on
- * the page; everything around it is server-rendered.
- */
 export function PostureDemo() {
   const { ref, tick } = useTick<HTMLDivElement>()
   const { score, bar, neck, tilt } = postureState(tick)
@@ -25,11 +21,6 @@ export function PostureDemo() {
           </>
         }
       >
-        {/*
-          `aria-live="off"` on purpose: this is an ambient decoration, and
-          announcing a new score every 850ms would make the page unusable
-          with a screen reader. The summary below carries the meaning.
-        */}
         <div aria-live="off" className="flex items-center gap-4">
           <AsciiArt art={POSE_FIGURE} className="text-ac-dim text-[10px] leading-[1.15]" />
 

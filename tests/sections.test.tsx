@@ -6,7 +6,6 @@ import { Hero } from '@/components/sections/hero'
 import { Skills } from '@/components/sections/skills'
 import { en } from '@/content/en'
 
-/** Sections use `<m.*>`, which requires the LazyMotion provider above them. */
 function renderSection(ui: React.ReactElement) {
   return render(<MotionProvider>{ui}</MotionProvider>)
 }
@@ -23,8 +22,6 @@ describe('Hero', () => {
   it('puts the character beside the text, not above it', () => {
     const { container } = renderSection(<Hero hero={en.hero} character={en.character} />)
 
-    // The drawing is a sibling of the text column inside one grid, which is
-    // what keeps them side by side; nesting it would make it flow with the copy.
     const grid = container.querySelector('.grid')
     expect(grid?.children).toHaveLength(2)
     expect(grid?.querySelector('.dc-scene')).not.toBeNull()

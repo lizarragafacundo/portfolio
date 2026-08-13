@@ -3,16 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { DEMO_TICK_MS } from '@/lib/demo-state'
 
-/**
- * Drives the animated demo widgets.
- *
- * Starts at 0 and only advances after mount, so the server-rendered HTML and
- * the first client render are identical — no hydration mismatch and no flash.
- *
- * The interval is only alive when the widget is actually worth animating:
- * on screen, in a visible tab, and not under `prefers-reduced-motion`.
- * A portfolio left open in a background tab should cost nothing.
- */
 export function useTick<T extends HTMLElement>(intervalMs: number = DEMO_TICK_MS) {
   const ref = useRef<T>(null)
   const [tick, setTick] = useState(0)

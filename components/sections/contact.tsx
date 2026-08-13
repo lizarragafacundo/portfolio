@@ -25,13 +25,6 @@ export function Contact({ title, message, resumeLabel, locale }: ContactProps) {
                 href={`mailto:${site.email}`}
                 className="border-ac text-ac hover:bg-ac hover:text-bg border px-4.5 py-2.5 text-[13px] font-bold transition-colors"
               >
-                {/*
-                  The prototype used an envelope (U+2709). JetBrains Mono has
-                  no such glyph, so it rendered from whatever emoji font the OS
-                  happened to supply — a colour pictogram in the middle of a
-                  monochrome terminal. `@` says "email" just as clearly and is
-                  plain ASCII.
-                */}
                 @ {site.email}
               </a>
             </li>

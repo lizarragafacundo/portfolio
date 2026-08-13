@@ -1,6 +1,5 @@
 import { cn } from '@/lib/cn'
 
-/** Bordered chip used for tech stacks, tools and certifications. */
 export function Tag({
   children,
   variant = 'accent',

@@ -1,4 +1,3 @@
-/** A fake terminal window — three dots, a title bar and an optional status row. */
 export function TerminalFrame({
   title,
   status,

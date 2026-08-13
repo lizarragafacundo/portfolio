@@ -1,26 +1,11 @@
-/**
- * Pure state for the two animated ASCII widgets.
- *
- * Everything here is a function of a single integer `tick`, which means the
- * server can render tick 0 and the client can hydrate to exactly the same
- * markup — no mismatch, no flash. It also makes the widgets testable without
- * a DOM or fake timers.
- */
-
 export const DEMO_TICK_MS = 850
-
-/* ------------------------------------------------------------------ Posture */
 
 const POSTURE_BAR_WIDTH = 18
 
 export interface PostureState {
-  /** 0–100 posture score. */
   score: number
-  /** `█`/`░` bar, always POSTURE_BAR_WIDTH characters wide. */
   bar: string
-  /** Forward neck angle, degrees. */
   neck: number
-  /** Lateral tilt, degrees. */
   tilt: number
 }
 
@@ -35,8 +20,6 @@ export function postureState(tick: number): PostureState {
     tilt: 2 + Math.round(3 * Math.abs(Math.cos(tick / 2.7))),
   }
 }
-
-/* --------------------------------------------------------------- Marktboost */
 
 export const PIPELINE_STAGES = [
   'validate',
@@ -62,7 +45,6 @@ const LEADS = [
   { handle: '@atlas.realty', vertical: 'real estate', score: 73 },
 ] as const
 
-/** Scores at or above this are treated as qualified leads. */
 export const QUALIFIED_THRESHOLD = 70
 
 export interface LeadRow {
@@ -76,7 +58,6 @@ export interface LeadRow {
 export interface PipelineState {
   stages: PipelineStage[]
   rows: LeadRow[]
-  /** Items waiting in the durable priority queue. */
   queue: number
 }
 
@@ -98,13 +79,10 @@ export function pipelineState(tick: number): PipelineState {
   }
 }
 
-/* ----------------------------------------------------------------- helpers */
-
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value))
 }
 
-/** Modulo that stays non-negative for negative ticks. */
 function mod(value: number, divisor: number): number {
   return ((value % divisor) + divisor) % divisor
 }

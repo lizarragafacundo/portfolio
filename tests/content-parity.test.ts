@@ -2,16 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { en } from '@/content/en'
 import { es } from '@/content/es'
 
-/**
- * `satisfies Content` already guarantees both locales have the same *fields*.
- * What TypeScript cannot check is that they describe the same *facts*: adding
- * a job or a skill group to one language and forgetting the other compiles
- * fine and ships a page that quietly says less in Spanish.
- */
-
 type Json = string | number | boolean | null | Json[] | { [key: string]: Json }
 
-/** Every path in the tree, with arrays collapsed to `[]` and lengths recorded. */
 function shape(value: Json, path = ''): string[] {
   if (Array.isArray(value)) {
     return [
@@ -38,10 +30,6 @@ describe('locale parity', () => {
     expect(es.experience.map((job) => job.company)).toEqual(en.experience.map((job) => job.company))
   })
 
-  /**
-   * Not a deep equality check: a few entries are genuinely translated
-   * ("autonomous agents" → "agentes autónomos"). Product names must not be.
-   */
   it('lists the same number of technologies per skill group', () => {
     expect(es.skills.map((group) => group.items.length)).toEqual(
       en.skills.map((group) => group.items.length),
@@ -75,8 +63,6 @@ describe('content hygiene', () => {
     '%s avoids the phrasings the CV deliberately does not use',
     (_name, content) => {
       const text = JSON.stringify(content).toLowerCase()
-      // Both claims overstate my role on team projects. Easy to reintroduce
-      // while rewording a bullet, so the test guards them.
       expect(text).not.toContain('sole developer')
       expect(text).not.toContain('my funds')
     },

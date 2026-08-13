@@ -1,4 +1,3 @@
-/** Single source of truth for identity and links used across metadata and UI. */
 export const site = {
   name: 'Facundo Lizarraga',
   handle: 'faculizarraga',
@@ -6,10 +5,6 @@ export const site = {
   email: 'faculizarraga0@gmail.com',
   linkedin: 'https://linkedin.com/in/facundolizarraga',
   location: 'Buenos Aires, Argentina',
-  /**
-   * Vercel injects VERCEL_PROJECT_PRODUCTION_URL on every deploy, so previews
-   * and production both resolve absolute URLs without a hardcoded domain.
-   */
   url:
     process.env.NEXT_PUBLIC_SITE_URL ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL

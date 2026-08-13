@@ -1,15 +1,9 @@
 import { Reveal } from '@/components/motion/reveal'
 import type { SectionId } from '@/lib/site'
 
-/**
- * A page section with its numbered terminal-style header:
- *
- *   [ experience ] ────────────────────────── 02
- */
 interface SectionProps {
   id: SectionId
   title: string
-  /** Two-digit index shown on the right, e.g. "02". */
   index: string
   children: React.ReactNode
 }
@@ -25,9 +19,6 @@ export function Section({ id, title, index, children }: SectionProps) {
             id={headingId}
             className="text-ac text-sm font-bold tracking-[0.125em] whitespace-nowrap"
           >
-            {/* Brackets are decoration — keeping them out of the accessible
-                name means the section is announced as "experience", not
-                "[ experience ]". */}
             <span aria-hidden="true">[ </span>
             {title}
             <span aria-hidden="true"> ]</span>

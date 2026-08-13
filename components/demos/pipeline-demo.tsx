@@ -5,7 +5,6 @@ import { useTick } from '@/hooks/use-tick'
 import { cn } from '@/lib/cn'
 import { pipelineState, type StagePhase } from '@/lib/demo-state'
 
-/** Live mock of the Marktboost Step Functions pipeline and lead scorer. */
 export function PipelineDemo() {
   const { ref, tick } = useTick<HTMLDivElement>()
   const { stages, rows, queue } = pipelineState(tick)

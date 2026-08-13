@@ -4,11 +4,6 @@ import { cn } from '@/lib/cn'
 import { type Locale, resumeHref } from '@/lib/i18n'
 import { site } from '@/lib/site'
 
-/**
- * Fixed header. Fully server-rendered: the language switch is a real <Link>
- * to the other locale's static page, not a client-side toggle, so it costs
- * zero JS and gives each language a shareable URL.
- */
 export function SiteNav({ locale, content }: { locale: Locale; content: Content }) {
   const links = [
     { href: '#about', label: content.nav.about },

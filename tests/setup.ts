@@ -4,9 +4,6 @@ import { afterEach, vi } from 'vitest'
 
 afterEach(cleanup)
 
-// jsdom implements neither of the observers the reveal animations rely on.
-// A stub that never fires is the right default: components must render their
-// content regardless, and that is exactly what the tests assert.
 class NoopObserver {
   observe() {}
   unobserve() {}
@@ -22,7 +19,6 @@ class NoopObserver {
 vi.stubGlobal('IntersectionObserver', NoopObserver)
 vi.stubGlobal('ResizeObserver', NoopObserver)
 
-// jsdom ships no matchMedia; the demo widgets read it to honour reduced motion.
 vi.stubGlobal(
   'matchMedia',
   vi.fn().mockImplementation((query: string) => ({

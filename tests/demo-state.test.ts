@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { PIPELINE_STAGES, pipelineState, postureState, QUALIFIED_THRESHOLD } from '@/lib/demo-state'
 
-/** Ticks covering several full cycles of both widgets, plus the edges. */
 const TICKS = Array.from({ length: 60 }, (_, i) => i)
 
 describe('postureState', () => {

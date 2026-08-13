@@ -2,12 +2,6 @@
 
 import { m } from 'motion/react'
 
-/**
- * Reveals a list one item at a time. Pair `<Stagger>` with one `<StaggerItem>`
- * per child; the parent orchestrates timing through variants, so the delay is
- * computed by Motion rather than hardcoded per index.
- */
-
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const
 
 const container = {
