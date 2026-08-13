@@ -1,38 +1,37 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-bg: #0c0c0c;
-  --color-bg-deep: #080808;
-  --color-surface: #161616;
-  --color-surface-2: #121212;
-  --color-chip: #1e1e1e;
+  --color-bg: #e9e7df;
+  --color-bg-deep: #dedbd0;
+  --color-surface: #f3f1e9;
+  --color-surface-2: #e2dfd4;
+  --color-chip: #d4d0c4;
 
-  --color-fg: #cccccc;
-  --color-fg-dim: #b0b0b0;
-  --color-fg-mute: #8a8a8a;
-  --color-fg-faint: #6e6e6e;
+  --color-fg: #20242b;
+  --color-fg-dim: #3f4650;
+  --color-fg-mute: #626a74;
+  --color-fg-faint: #7f858b;
 
-  --color-border: #333333;
-  --color-border-soft: #262626;
+  --color-border: #a8a59b;
+  --color-border-soft: #c7c3b8;
 
-  --color-ac: #16c60c;
-  --color-ac-bright: #3ff23a;
-  --color-ac-dim: #0f8c08;
-  --color-ac-alt: #3a96dd;
-  --color-warn: #c19c00;
+  --color-ac: #244d73;
+  --color-ac-bright: #163f67;
+  --color-ac-dim: #5d7892;
+  --color-ac-alt: #8a4f35;
+  --color-warn: #8a6516;
 
   --font-mono:
     Consolas, 'Lucida Console', var(--font-jetbrains-mono-box), var(--font-jetbrains-mono), Menlo,
     'DejaVu Sans Mono', ui-monospace, monospace;
 
-  --shadow-glow: 0 0 12px rgb(22 198 12 / 0.35);
-  --text-shadow-glow: 0 0 10px rgb(22 198 12 / 0.4);
+  --shadow-glow: 0 0 0 1px rgb(36 77 115 / 0.14);
+  --text-shadow-glow: none;
 }
 
 @layer base {
   :root {
-    color-scheme: dark;
-    /* The fixed nav is 61px tall; anchor jumps must clear it. */
+    color-scheme: light;
     scroll-padding-top: 6rem;
   }
 
@@ -61,22 +60,22 @@
         0deg,
         transparent,
         transparent 2px,
-        rgb(22 198 12 / 0.022) 2px,
-        rgb(22 198 12 / 0.022) 4px
+        rgb(36 77 115 / 0.025) 2px,
+        rgb(36 77 115 / 0.025) 4px
       ),
       repeating-linear-gradient(
         90deg,
-        rgb(22 198 12 / 0.05) 0px,
+        rgb(36 77 115 / 0.045) 0px,
         transparent 1px,
         transparent 45px,
-        rgb(22 198 12 / 0.05) 46px
+        rgb(36 77 115 / 0.045) 46px
       ),
       repeating-linear-gradient(
         180deg,
-        rgb(22 198 12 / 0.04) 0px,
+        rgb(36 77 115 / 0.04) 0px,
         transparent 1px,
         transparent 45px,
-        rgb(22 198 12 / 0.04) 46px
+        rgb(36 77 115 / 0.04) 46px
       );
     background-size:
       100% 100%,
@@ -90,7 +89,7 @@
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 0.62) 100%);
+    background: radial-gradient(ellipse at center, transparent 58%, rgb(65 67 70 / 0.12) 100%);
   }
 
   ::selection {
@@ -103,7 +102,6 @@
     outline-offset: 3px;
   }
 
-  /* ASCII art must never reflow or wrap. */
   pre {
     margin: 0;
     font-family: inherit;
@@ -133,11 +131,6 @@
   }
 }
 
-/*
- * Anyone who has asked their OS to reduce motion gets a completely static
- * page: no blinking caret, no smooth scroll, no reveal transitions. The
- * JS side mirrors this via MotionConfig reducedMotion="user".
- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

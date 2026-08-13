@@ -9,35 +9,20 @@ export const alt = 'Facundo Lizarraga — Senior Full-Stack Engineer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-/**
- * The palette, repeated as literals.
- *
- * Satori renders this tree outside the browser: there is no stylesheet, no
- * cascade, and no custom properties, so `var(--color-ac)` resolves to nothing
- * and the text comes out black. These values must be kept in step with the
- * `@theme` block in `app/globals.css` by hand — hence one block rather than
- * eleven scattered string literals.
- */
 const OG = {
-  bg: '#0c0c0c',
-  grid: 'rgba(22,198,12,0.06)',
-  gridSoft: 'rgba(22,198,12,0.05)',
-  ink: '#16c60c',
-  text: '#cccccc',
-  mute: '#8a8a8a',
-  faint: '#6e6e6e',
+  bg: '#e9e7df',
+  grid: 'rgba(36,77,115,0.06)',
+  gridSoft: 'rgba(36,77,115,0.05)',
+  ink: '#244d73',
+  text: '#20242b',
+  mute: '#626a74',
+  faint: '#7f858b',
 } as const
 
-/** One card per locale, both rendered at build time. */
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }))
 }
 
-/**
- * The font is vendored in `assets/fonts` rather than fetched from Google at
- * build time: Satori has no fallback font, so a network hiccup in CI would
- * otherwise fail the build.
- */
 async function loadFont() {
   return readFile(join(process.cwd(), 'assets', 'fonts', 'JetBrainsMono-Bold.ttf'))
 }
@@ -77,8 +62,6 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
         >
           {site.initials}
         </div>
-        {/* Single-string children throughout: Satori rejects any <div> with
-              more than one child unless it declares an explicit display. */}
         <div style={{ fontSize: 24, opacity: 0.9 }}>{`${site.handle}_`}</div>
       </div>
 
